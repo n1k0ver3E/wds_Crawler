@@ -89,4 +89,4 @@ def mytask2(bot):
     gl = bot.List('group', '556592071')
     if gl is not None:
         for group in gl:
-            bot.SendTo(group, July_wds.start())
+            bot.SendTo(group, July_wds.start()) 
