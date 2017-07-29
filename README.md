@@ -1,5 +1,5 @@
 # wds_Crawler
-snh48/bej48 微打赏集资 爬虫
+SNH48 wds集资爬虫的qqbot插件
 
 
 ## 0x00 简介
