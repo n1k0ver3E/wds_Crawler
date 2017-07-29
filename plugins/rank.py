@@ -21,6 +21,8 @@ def start():
 	money_sup=[]
 	rg=soup1.find("div",class_="b").get_text()
 	num=int(rg[0:3])
+	if num>=20:
+		num=20
 
 	for i in range(num):
 		money=soup2.find_all("span","money")[i].get_text()
@@ -34,4 +36,4 @@ def start():
 	return result
 
 if __name__ == '__main__':
-	start() 
+	start()

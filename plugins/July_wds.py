@@ -7,7 +7,7 @@ def start():
 
 	now=datetime.datetime.now()
 	then=datetime.datetime(2017,7,29)
-	day=(then-now).days
+	day=(then-now).days+1
 
 	url1="https://wds.modian.com/show_weidashang_pro/5329#1"
 	url2="https://wds.modian.com/ranking_list?pro_id=5329"
@@ -17,7 +17,7 @@ def start():
 	html_doc=r.text
 	soup=BS4(html_doc,"html.parser")
 	res=soup.find_all("div", class_="mon current")[0].find_all("span")[1].get_text()
-	return ("本次活动一共贡献了"+res+"."+"\n"+"在最后的"+str(day)+"天里我们一起创造奇迹吧！"+"\n"+"微打赏地址：https://wds.modian.com/show_weidashang_pro/5329?from=create_list#1")
+	return ("本次活动一共贡献了"+res+"."+"\n"+"在最后的"+str(day)+"天里我们一起创造奇迹吧！"+"\n"+"微打赏地址：http://jli.li/I"+"\n"+"淘宝地址：http://jli.li/J  可信用卡可花呗支付")
 
 	#nick=soup.find_all("span","nick")[0].get_text()
 	#nick_sup=soup.find_all("span","nick_sup")[0].get_text()
