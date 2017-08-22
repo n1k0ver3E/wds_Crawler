@@ -1,3 +1,6 @@
+"""
+第26行 msg_text=d["cards"][2]["mblog"]["text"] 中的2可能与小偶像的首条微博不符请自行调整。单针对李想而言，[0]是微博置顶，[1]排微博推荐，[2]才是最新微博。
+"""
 from qqbot.utf8logger import DEBUG
 from qqbot.utf8logger import INFO
 from qqbot import qqbotsched
