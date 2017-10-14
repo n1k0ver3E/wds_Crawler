@@ -2,10 +2,12 @@
 SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 ## 0x00 NEW!!
+更新``b50.py`` ——更新了实时监控的最新算法~修复了bug
 更新``update_weibo.py`` ——追加新微博检测功能
 
 ## 0x01 简介
 这是一个基于[qqbot](https://github.com/pandolia/qqbot)对SNH48g的集资情况进行跟踪并实时播报的插件。
+
 
 
 ``new.py`` 本插件的启动程序
