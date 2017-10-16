@@ -84,10 +84,10 @@ def return_top():
     temp_array.append(res)
     print(temp_array)
 
-    f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'r')
+    f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'r')     #文件位置请自行更换
 
     if(temp_array[0]!=f.read()):
-        f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')
+        f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')  #文件位置请自行更换
         f.write(temp_array[0])
         post_id=temp_array[1]
         post_name=temp_array[2]
