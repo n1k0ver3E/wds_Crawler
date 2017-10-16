@@ -2,7 +2,10 @@
 SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 ## 0x00 NEW!!
-更新``b50.py`` ——更新了实时监控的最新算法~修复了bug
+
+原定时任务的函数已合并至``b50.py``
+
+更新``b50.py`` ——整体进行重构，暂无明显bug。
 
 更新``update_weibo.py`` ——追加新微博检测功能
 
@@ -10,12 +13,9 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 这是一个基于[qqbot](https://github.com/pandolia/qqbot)对SNH48g的集资情况进行跟踪并实时播报的插件。
 
 
+``b50.py`` 本插件的启动程序
 
-``new.py`` 本插件的启动程序
-
-``rank.py`` 可获取该集资链接的排名TOP 20
-
-``July_wds.py`` 是发送定时消息的函数
+``rank.py`` 用于存储聚聚榜TOP20的userID/金额/姓名
 
 ``update_weibo.py`` 是新微博检测插件
 
@@ -31,26 +31,38 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 ## 0x03 使用
 1. 在 Python 2.7/3.4+ 下使用，用 pip 安装：``pip install qqbot``
 
-2. 将``/plugins``的全部内容拷贝到``.qqbot-tmp/plugins/``下。再开启新的终端 运行``qq plug new``即可。
+2. 将``/plugins``的全部内容拷贝到``.qqbot-tmp/plugins/``下。再开启新的终端 运行``qq plug b50``即可。卸载可用``qq unplug b50``
 
 3. 在终端输入``qq plug update_weibo`` 运行新微博提醒插件。
 3. 其他详细的qqbot使用方法详见[Readme](https://github.com/pandolia/qqbot)
 
 4. 关于新浪微博模拟登陆原理详见[nikochan.cc](http://www.nikochan.cc/2017/08/03/Crawlerweibonotloggin/)
 
-## 0x04 感谢
+## 0x04 TO DO
+1. 在群内自动添加集资目标，并自动识别，自动修正更新
+2. 只做了TOP20的排行，后面可以通过post请求进行完善
+3. 大概会尽快更新吧...
+
+## 0x05 感谢
 * [pandolia/qqbot]()
 
-## 0x05 其他
+## 0x06 其他
+10.17.17:
+
+一个猛地就重构了整个插件，提高了可读性。【之前随便写写的，实在是看不下去了...
+
+---------
+08.23.17:
+
 没想到夏天结束了，冬天这么早就开始了。本插件会按照群内需求实时保持更新。
 
 如果有其他意见以及bug欢迎提出来！
 
 *希望各位看到觉得有帮助可以star一下！*
 
-08.23.17
-
 ---------
+07.29.17:
+
 夏天结束了。
 
 我们B50，再见！
@@ -58,4 +70,3 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 *Best wishes to BEJ48 Team E LiXiang.* 
 
-07.29.17
