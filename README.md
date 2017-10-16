@@ -15,7 +15,7 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 ``b50.py`` 本插件的启动程序
 
-``rank.py`` 用于存储聚聚榜TOP20的userID/金额/姓名
+``rank.py`` 用于记录聚聚榜 TOP20 的 userID / 金额 / 姓名
 
 ``update_weibo.py`` 是新微博检测插件
 
@@ -40,11 +40,15 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 ## 0x04 TO DO
 1. 在群内自动添加集资目标，并自动识别，自动修正更新
-2. 只做了TOP20的排行，后面可以通过post请求进行完善
-3. 大概会尽快更新吧...
+2. 只做了TOP20的排行，后面的榜单可以POST来进行全部数据的爬取，有点懒了...
+
 
 ## 0x05 感谢
 * [pandolia/qqbot]()
+
+## 0x06 Contact Me:
+
+如果有问题和bug，可通过[Email](mailto:pyf0311@gmail.com)与我联系。
 
 ## 0x06 其他
 10.17.17:
