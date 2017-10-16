@@ -126,4 +126,4 @@ def mytask2(bot):
 #def flag_send(bot):
 #    gl = bot.List('group', '556592071')
 #            bot.SendTo(group, koudai())
-
+ 
