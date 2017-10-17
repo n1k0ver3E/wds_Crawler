@@ -1,4 +1,3 @@
-import check
 import requests
 from qqbot.utf8logger import DEBUG
 from qqbot import qqbotsched
@@ -12,32 +11,36 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 #主爬虫
-def crawel_wds_url():  
+def crawel_wds_url():
     url1="https://wds.modian.com/show_weidashang_pro/8098#1"
     headers={'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','Accept-Language':'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
     r1=requests.get(url1,verify=False,headers=headers)
     html_doc_1=r1.text
     soup=BS4(html_doc_1,"html.parser")
     return soup
-
 #聚聚榜爬虫
 def crawel_jujurank_url():
     url2="https://wds.modian.com/ranking_list?pro_id=8098"
-    headers={'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','Accept-Language':'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
+    headers={'Accepat':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','Accept-Language':'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
     r2=requests.get(url2,verify=False,headers=headers)
     html_doc_2=r2.text
     soup=BS4(html_doc_2,"html.parser")
     return soup
 
 def onQQMessage(bot, contact, member, content):
-    if content == 'b50' or 'B50' or 'b50 ':
-        bot.SendTo(contact, Ontime())
-    elif content == 'flag':
-        bot.SendTo(contact,flag())
-    elif content == '口袋':
-        bot.SendTo(contact,koudai())
-    elif '@ME' in content:
-        bot.SendTo(contact,member.name+"初次见面，请多指教！！")
+    gl = bot.List('group', '556592071')
+    if gl is not None:
+        for group in gl:
+            if content == 'b50' :
+                bot.SendTo(group, Ontime())
+            elif content == 'B50' :
+                bot.SendTo(group, Ontime())
+            elif content == 'flag':
+                bot.SendTo(group,flag())
+            elif content == '口袋':
+                bot.SendTo(group,koudai())
+            elif '@ME' in content:
+                bot.SendTo(group,member.name+"初次见面，请多指教！！")
 
 def Ontime():
     money=return_total_money()
@@ -55,14 +58,14 @@ def koudai():
 def b50xingxinghao(bot):
     money=return_total_money()
     post_text="B50就要到了，不来打个卡么？"+"\n"+"当前活动已筹："+money+"元"+"\n"+"wds链接：http://jli.li/I"
-    gl = bot.List('group', '389660866')
+    gl = bot.List('group', '556592071')
     if gl is not None:
         for group in gl:
             bot.SendTo(group,post_text)
-#监听任务
+#Main
 @qqbotsched(hour='0-23', minute='0-59', second='0-59/30')
 def mytask(bot):
-    gl = bot.List('group', '389660866')
+    gl = bot.List('group', '556592071')
     if gl is not None:
         for group in gl:
             result=return_top()
@@ -84,10 +87,11 @@ def return_top():
     temp_array.append(res)
     print(temp_array)
 
-    f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'r')     #文件位置请自行更换
+    f=open("/root/.qqbot-tmp/plugins/b50_msg",'r')
 
     if(temp_array[0]!=f.read()):
-        f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')  #文件位置请自行更换
+        f=open("/root/.qqbot-tmp/plugins/b50_msg",'w')
+#       f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')
         f.write(temp_array[0])
         post_id=temp_array[1]
         post_name=temp_array[2]
@@ -101,16 +105,22 @@ def return_ans(username,userid):
     ranking = str(return_user_ranking(userid))
     total = str(return_total_money())
     support_num = str(return_support_num())
-    return("刚刚 "+username+" 聚聚 "+"在【第四届金曲大赏集资2.0】活动中"+money+"！"+"\n"+"在聚聚榜上排名第"+ranking+"位!"+"\n"+"参与人数："+support_num+"\n"+"活动累计："+total+"元"+"\n"+"wds链接：http://jli.li/I")
+    print("ranking",str(ranking),ranking)
+    if ranking !='-1':
+        return("刚刚 "+username+" 聚聚 "+"在【第四届金曲大赏集资2.0】活动中"+money+"！"+"\n"+"在聚聚榜上排名第"+ranking+"位!"+"\n"+"参与人数："+support_num+"\n"+"活动累计："+total+"元"+"\n"+"wds链接：http://jli.li/I")
+    else:
+        return("刚刚 "+username+" 聚聚 "+"在【第四届金曲大赏集资2.0】活动中"+money+"！"+"\n"+"参与人数："+support_num+"\n"+"活动累计："+total+"元"+"\n"+"wds链接：http://jli.li/I")
 
 def return_user_ranking(userid):
     userId=int(userid)
-    rank=rank.main()
+    ranking=rank.main()
     num=int(return_support_num())
     for i in range(num):
-        rankId=int(rank[i][0])
+        rankId=int(ranking[i][0])
         if(userId == rankId):
             return i+1
+        else:
+            return -1
 
 def return_user_support_money():
     soup=crawel_wds_url()
