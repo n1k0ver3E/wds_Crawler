@@ -1,13 +1,15 @@
 # wds_Crawler
 SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
-## 0x00 NEW!!
+## 0x00 10.19 NEW!!
+
+10月19日 WDS平台进行维护，已更新``b50.py``插件。实测可进行jz情况的监控和检测。
 
 原定时任务的函数已合并至``b50.py``
 
 更新``b50.py`` ——整体进行重构，暂无明显bug。
 
-更新``update_weibo.py`` ——追加新微博检测功能
+
 
 ## 0x01 简介
 这是一个基于[qqbot](https://github.com/pandolia/qqbot)对SNH48g的集资情况进行跟踪并实时播报的插件。
