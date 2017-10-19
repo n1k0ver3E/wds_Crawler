@@ -7,17 +7,30 @@ import datetime
 import re
 import time
 import rank
+import json
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-#主爬虫
+#主页爬虫
+def crawel_wdsmain_url():
+    url2="https://wds.modian.com/show_weidashang_pro/8098#1"
+    headers={'Accepat':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','Accept-Language':'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
+    r2=requests.get(url2,verify=False,headers=headers)
+    html_doc_2=r2.text
+    soup=BS4(html_doc_2,"html.parser")
+    return soup
+
+#聚聚集资爬虫
 def crawel_wds_url():
-    url1="https://wds.modian.com/show_weidashang_pro/8098#1"
+    url="https://wds.modian.com/ajax/comment_list"
     headers={'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','Accept-Language':'en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
-    r1=requests.get(url1,verify=False,headers=headers)
-    html_doc_1=r1.text
+    payload={'page':'1', 'post_id':'17190','pro_id':'8098'}
+    r1=requests.post(url,data=payload, headers=headers)
+    raw_text=r1.text
+    html_doc_1=str(json.loads(raw_text)['data'])
     soup=BS4(html_doc_1,"html.parser")
     return soup
+
 #聚聚榜爬虫
 def crawel_jujurank_url():
     url2="https://wds.modian.com/ranking_list?pro_id=8098"
@@ -87,10 +100,10 @@ def return_top():
     temp_array.append(res)
     print(temp_array)
 
-    f=open("/root/.qqbot-tmp/plugins/b50_msg",'r')
+    f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'r')
 
     if(temp_array[0]!=f.read()):
-        f=open("/root/.qqbot-tmp/plugins/b50_msg",'w')
+        f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')
 #       f=open("/Users/Niko/.qqbot-tmp/plugins/b50_msg",'w')
         f.write(temp_array[0])
         post_id=temp_array[1]
@@ -114,9 +127,12 @@ def return_ans(username,userid):
 def return_user_ranking(userid):
     userId=int(userid)
     ranking=rank.main()
-    num=int(return_support_num())
+    #num=int(return_support_num())
+    num=20
     for i in range(num):
         rankId=int(ranking[i][0])
+        print("userId:", userId)
+        print("rankId:", rankId)
         if(userId == rankId):
             return i+1
         else:
@@ -128,18 +144,13 @@ def return_user_support_money():
     return money
 
 def return_support_num():
-    soup=crawel_wds_url()
+    soup=crawel_wdsmain_url()
     support_text=soup.find("div",class_="b").get_text()
     support_num = re.sub('[^0-9.]',"",support_text)
     return support_num
 
 def return_total_money():
-    soup=crawel_wds_url()
+    soup=crawel_wdsmain_url()
     total=soup.find_all("div", class_="mon current")[0].find_all("span")[1].get_text()
     total_num = re.sub('[^a-zA-Z0-9.]',"",total)
     return total_num
-
-
-
-
-
