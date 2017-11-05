@@ -80,5 +80,5 @@ SNH48 bej48 微打赏集资爬虫/微博内容推送的qqbot插件
 
 *Best wishes to BEJ48 Team E LiXiang.* 
 
-看到这了，真的不来点个关注吗？@BEJ48-李想
+**看到这了，真的不来点个关注吗？@BEJ48-李想
 神秘代码：556592071
